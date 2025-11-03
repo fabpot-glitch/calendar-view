@@ -1,16 +1,108 @@
-# React + Vite
+# 📅 Calendar View — Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🧩 Overview
+**Calendar View** is a modern, responsive web application designed to help users visualize and manage daily or monthly events seamlessly.  
+It features an intuitive calendar interface that allows users to easily organize, view, and track events with a clean, minimal UI.
 
-Currently, two official plugins are available:
+This project was developed as part of a **Web Development Internship Assignment** to demonstrate practical skills in front-end development, component-based architecture, and deployment using modern frameworks and tools.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🌐 Live Demo
+🚀 **Deployed Application:** [https://calendar-view-nine.vercel.app/](https://calendar-view-nine.vercel.app/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧱 Project Structure
+calendar-view/
+├── src/
+│ ├── Calendar/
+│ ├── components/
+│ ├── utils/
+│ ├── App.jsx
+│ └── main.jsx
+├── public/
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+├── vite.config.js
+└── README.md
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+---
+
+## ⚙️ Installation & Setup
+
+Follow these steps to run the project locally:
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/fabpot-glitch/calendar-view.git
+   cd calendar-view
+
+
+Install dependencies
+
+npm install
+
+
+Start the development server
+
+npm run dev
+
+
+Open your browser and visit 👉 http://localhost:5173
+
+🧰 Tech Stack
+
+⚛️ React.js — Component-based UI library
+
+⚡ Vite — Next-generation build tool for fast development
+
+🎨 Tailwind CSS — Utility-first CSS framework
+
+🧩 Storybook — Component documentation and preview
+
+☁️ Vercel — Deployment platform
+
+🧪 Cypress (optional) — End-to-end testing framework
+
+✨ Features
+
+🗓️ Interactive, responsive calendar layout
+
+📅 Supports daily and monthly event views
+
+♻️ Modular and reusable React components
+
+💡 Styled using Tailwind CSS for clean, scalable design
+
+🔍 Storybook integration for component previews
+
+🚀 Deployed live via Vercel
+
+📘 Storybook Deployment
+
+A dedicated Storybook build has been deployed to showcase the reusable UI components of the application.
+
+Storybook Preview: https://calendar-view-nine.vercel.app/
+
+📜 License
+
+This project is open-source and available under the MIT License.
+
+👩‍💻 Developer
+
+Sake Nikhitha
+Web Development Intern — Scoreazy
+📧 Email: sakenikhitha102@gmail.com
+
+💻 GitHub: https://github.com/fabpot-glitch
+
+🏁 Submission Summary
+
+Submission Format:
+
+GitHub Repository: https://github.com/fabpot-glitch/calendar-view
+
+Storybook Preview: https://calendar-view-nine.vercel.app/
