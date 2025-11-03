@@ -1,7 +1,71 @@
 // src/Calendar/Calendar.stories.jsx
 import React, { useState } from "react";
-import { CalendarHeader, CalendarGrid } from "./index";
+import { addDays, format } from "date-fns";
 
+// Mock CalendarHeader
+const CalendarHeader = ({ currentMonth, onMonthChange }) => {
+  const prevMonth = () => {
+    const newDate = new Date(currentMonth);
+    newDate.setMonth(currentMonth.getMonth() - 1);
+    onMonthChange(newDate);
+  };
+
+  const nextMonth = () => {
+    const newDate = new Date(currentMonth);
+    newDate.setMonth(currentMonth.getMonth() + 1);
+    onMonthChange(newDate);
+  };
+
+  return (
+    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
+      <button onClick={prevMonth}>{"<"}</button>
+      <h2>{format(currentMonth, "MMMM yyyy")}</h2>
+      <button onClick={nextMonth}>{">"}</button>
+    </div>
+  );
+};
+
+// Mock CalendarGrid
+const CalendarGrid = ({ selectedDate, onDateSelect, events }) => {
+  const start = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+  const end = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0);
+
+  const days = [];
+  for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
+    days.push(new Date(d));
+  }
+
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "5px" }}>
+      {days.map((day) => {
+        const isToday = day.toDateString() === new Date().toDateString();
+        const dayEvents = events.filter((e) => e.date.toDateString() === day.toDateString());
+
+        return (
+          <div
+            key={day.toISOString()}
+            onClick={() => onDateSelect(new Date(day))}
+            style={{
+              padding: "10px",
+              border: "1px solid #ccc",
+              backgroundColor: isToday ? "#def" : "#fff",
+              cursor: "pointer",
+            }}
+          >
+            <div>{day.getDate()}</div>
+            {dayEvents.map((e) => (
+              <div key={e.id} style={{ fontSize: "0.7rem", color: "green" }}>
+                {e.title}
+              </div>
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// Storybook default export
 export default {
   title: "Components/Calendar",
   component: CalendarGrid,
@@ -10,68 +74,22 @@ export default {
   },
 };
 
-// Mock events for the calendar
-const mockEvents = [
-  { id: 1, date: "2025-11-03", title: "Team Meeting" },
-  { id: 2, date: "2025-11-05", title: "Project Deadline" },
-  { id: 3, date: "2025-11-10", title: "Birthday Celebration" },
-  { id: 4, date: "2025-11-15", title: "Doctor Appointment" },
-];
+// Story template
+const Template = (args) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-// Default Calendar Story
-export const Default = (args) => {
-  const [selectedDate, setSelectedDate] = useState(new Date(args.selectedDate || new Date()));
+  const events = [
+    { id: 1, date: new Date(), title: "Today Event" },
+    { id: 2, date: addDays(new Date(), 2), title: "Future Event" },
+  ];
 
   return (
-    <div style={{ width: "450px", margin: "20px auto", fontFamily: "sans-serif" }}>
-      <CalendarHeader
-        currentDate={selectedDate}
-        onPrevious={() =>
-          setSelectedDate(
-            new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, 1)
-          )
-        }
-        onNext={() =>
-          setSelectedDate(
-            new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 1)
-          )
-        }
-      />
-      <CalendarGrid
-        currentDate={selectedDate}
-        selectedDate={selectedDate}
-        events={mockEvents}
-        onDateSelect={(date) => setSelectedDate(date)}
-      />
+    <div style={{ maxWidth: "800px", margin: "0 auto", padding: "1rem" }}>
+      <CalendarHeader currentMonth={selectedDate} onMonthChange={setSelectedDate} />
+      <CalendarGrid selectedDate={selectedDate} onDateSelect={setSelectedDate} events={events} />
     </div>
   );
 };
 
-// Story showing a month with no events
-export const EmptyMonth = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date("2025-12-01"));
-
-  return (
-    <div style={{ width: "450px", margin: "20px auto", fontFamily: "sans-serif" }}>
-      <CalendarHeader
-        currentDate={selectedDate}
-        onPrevious={() =>
-          setSelectedDate(
-            new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, 1)
-          )
-        }
-        onNext={() =>
-          setSelectedDate(
-            new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 1)
-          )
-        }
-      />
-      <CalendarGrid
-        currentDate={selectedDate}
-        selectedDate={selectedDate}
-        events={[]} // no events
-        onDateSelect={(date) => setSelectedDate(date)}
-      />
-    </div>
-  );
-};
+export const Default = Template.bind({});
+Default.args = {};

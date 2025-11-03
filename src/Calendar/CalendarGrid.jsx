@@ -1,23 +1,43 @@
-import React from 'react';
-import CalendarCell from './CalendarCell';
+// src/Calendar/CalendarGrid.jsx
+import React from "react";
+import CalendarCell from "./CalendarCell";
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays } from "date-fns";
 
-const CalendarGrid = ({ events = [], selectedDate, onDateClick }) => {
-  // Example: show 7x5 grid for a month
-  const days = Array.from({ length: 35 }, (_, i) => i + 1);
+export default function CalendarGrid({ currentDate, selectedDate, events = [], onDateSelect }) {
+  const startMonth = startOfMonth(currentDate);
+  const endMonth = endOfMonth(currentDate);
+  const startDate = startOfWeek(startMonth);
+  const endDate = endOfWeek(endMonth);
 
-  return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
-      {days.map(day => (
+  const rows = [];
+  let days = [];
+  let day = startDate;
+
+  while (day <= endDate) {
+    for (let i = 0; i < 7; i++) {
+      const dayEvents = events.filter(
+        (evt) => new Date(evt.date).toDateString() === day.toDateString()
+      );
+
+      days.push(
         <CalendarCell
-          key={day}
-          date={`2025-11-${day.toString().padStart(2, '0')}`}
-          events={events.filter(e => e.date === `2025-11-${day.toString().padStart(2, '0')}`)}
-          isSelected={selectedDate === `2025-11-${day.toString().padStart(2, '0')}`}
-          onClick={onDateClick}
+          key={day.toString()}
+          date={day}
+          events={dayEvents}
+          onEdit={(evt) => console.log("Edit event:", evt)}
+          onDateSelect={onDateSelect}
+          month={currentDate.getMonth()}
         />
-      ))}
-    </div>
-  );
-};
+      );
+      day = addDays(day, 1);
+    }
+    rows.push(
+      <div key={day.toString()} className="grid grid-cols-7 gap-2 mb-2">
+        {days}
+      </div>
+    );
+    days = [];
+  }
 
-export default CalendarGrid;
+  return <div>{rows}</div>;
+}
