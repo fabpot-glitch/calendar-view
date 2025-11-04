@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "1.0.0",
+  "private": true,
   "homepage": "https://fabpot-glitch.github.io/frontend",
   "scripts": {
     "dev": "vite",
@@ -13,22 +14,28 @@
   },
   "dependencies": {
     "date-fns": "^4.1.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@storybook/react": "^8.4.2",
-    "@storybook/react-vite": "^8.4.2",
-    "@storybook/addon-essentials": "^8.4.2",
-    "@storybook/addon-interactions": "^8.4.2",
-    "@storybook/testing-library": "^0.2.2",
-    "@storybook/addon-links": "^8.4.2",
-    "@storybook/addon-onboarding": "^8.4.2",
+    "@chromatic-com/storybook": "^3.2.7",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^8.6.14",
+    "@storybook/addon-onboarding": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/builder-vite": "^8.6.14",
+    "@storybook/experimental-addon-test": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/test": "^8.6.14",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.14",
+    "gh-pages": "^5.0.0",
     "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.2",
-    "vite": "^7.1.12",
-    "gh-pages": "^5.0.0"
+    "prop-types": "^15.8.1",
+    "storybook": "^8.6.14",
+    "tailwindcss": "^3.4.14",
+    "vite": "^6.0.1"
   }
 }
